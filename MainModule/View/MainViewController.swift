@@ -19,7 +19,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        presenter.getCocktails()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.dataSource = self
     }
@@ -42,11 +42,13 @@ extension MainViewController: UITableViewDataSource {
 
 extension MainViewController: MainViewProtocol {
     func success() {
-        <#code#>
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     func failure(error: Error) {
-        <#code#>
+        print(error.localizedDescription)
     }
     
  

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NetworkServiceProtocol {
-    func getCocktails(completion: @escaping (Result<[Cocktail]?, Error>) -> Void)
+    func getCocktails(completion: @escaping (Result<CocktailResponse?, Error>) -> Void)
 }
 
 
@@ -20,15 +20,16 @@ class NetrworkService: NetworkServiceProtocol {
     let session = URLSession.shared
     
     
-    func getCocktails(completion: @escaping (Result<[Cocktail]?, Error>) -> Void) {
+    func getCocktails(completion: @escaping (Result<CocktailResponse?, Error>) -> Void) {
         guard let url = URL(string: "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic") else { return }
         session.dataTask(with: url) { data, response, error in
             if let error = error {
                 completion(.failure(error))
                 return
             }
+            print(data!)
             do {
-                let obj = try self.decoder.decode([Cocktail].self, from: data!)
+                let obj = try self.decoder.decode(CocktailResponse.self, from: data!)
                 completion(.success(obj))
             } catch {
                 completion(.failure(error))

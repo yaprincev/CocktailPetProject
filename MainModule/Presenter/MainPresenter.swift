@@ -7,15 +7,15 @@
 
 import Foundation
 
-protocol MainViewProtocol: class {
+protocol MainViewProtocol: AnyObject {
     func success()
     func failure(error: Error)
 }
 
-protocol MainViewPresenterProtocol: class {
+protocol MainViewPresenterProtocol: AnyObject {
     init(view: MainViewProtocol, networkService: NetworkServiceProtocol)
     func getCocktails()
-    var cocktails: [Cocktail]? { get set }
+    var cocktails: CocktailResponse? { get set }
 }
 
 class MainPresenter: MainViewPresenterProtocol {
@@ -23,7 +23,7 @@ class MainPresenter: MainViewPresenterProtocol {
     
     weak var view: MainViewProtocol?
     let networkService: NetworkServiceProtocol!
-    var cocktails: [Cocktail]?
+    var cocktails: CocktailResponse?
     required init(view: MainViewProtocol, networkService: NetworkServiceProtocol) {
         self.view = view
         self.networkService = networkService
