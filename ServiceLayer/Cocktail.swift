@@ -17,5 +17,5 @@ struct Cocktail: Codable {
 }
 
 struct CocktailResponse: Codable {
-    let cocktails: [Cocktail]
+    let drinks: [Cocktail]
 }

@@ -27,7 +27,6 @@ class MainPresenter: MainViewPresenterProtocol {
     required init(view: MainViewProtocol, networkService: NetworkServiceProtocol) {
         self.view = view
         self.networkService = networkService
-        getCocktails()
     }
     
     func getCocktails() {
