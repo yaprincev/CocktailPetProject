@@ -27,7 +27,6 @@ class NetrworkService: NetworkServiceProtocol {
                 completion(.failure(error))
                 return
             }
-            print(data!)
             do {
                 let obj = try self.decoder.decode(CocktailResponse.self, from: data!)
                 completion(.success(obj))
